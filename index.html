@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Code Code Revolution</title>
+
+    <link rel="stylesheet" href="CSS/styles.css">
+
+    <style>
+        .code-block {
+            top:25%;
+            height: fit-content;
+        }
+    </style>
+</head>
+
+<body>
+    <main>
+        
+        <section class="gamewindow">
+            <div class="code-block" style=""><span class="missing blinking-cursor" data-index="0"></span>This is a HEADER 2&lt;/h2&gt;</div>
+        </section>
+        <section class="playerinputwindow">
+            <div class="keys">
+                <button class="key" data-char=">">&gt;</button>
+                <button class="key" data-char="h">H</button>
+                <button class="key" data-char="<">&lt;</button>
+                <button class="key" data-char="h">2</button>
+            </div>
+            <div class="button-bar">
+                <button id="undoBtn">Undo</button>
+                <button id="clearBtn">Clear</button>
+            </div>
+        </section>
+
+        <section class="settings"> 
+            <div class="timer-container">Timer: <span class="timer">7</span></div>
+            <div class="settings-items">
+                <button id="btn-help">
+                    <span class="icon-help"><img src="images/icon-help.svg" alt=""></span>
+                </button>
+            </div>
+        </section>
+        <section class="score"> 
+            <span>Score: </span> <span id="scoreVal">180</span>
+        </section>
+        <section class="renderwindow">
+            <h3>Render Preview</h3>
+            <!-- start of generated render solution -->
+            <div class="example-box"> <!-- parent-->
+                <h2>This is a HEADER 2</h2>
+            </div>
+        </section>
+        
+    </main>
+    
+    <script src="scripts/keyboard.js"></script>
+    <script src="scripts/tutorial.js"></script>
+</body>
+
+</html>
