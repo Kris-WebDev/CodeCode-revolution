@@ -305,7 +305,7 @@ function pauseGame() {
   }
 
   document.querySelectorAll(".key").forEach(key => key.disabled = true);
-  window.removeEventListener("keydown", handleTyping);
+  //window.removeEventListener("keydown", handleTyping);
 }
 
 function resumeGame() {
@@ -332,8 +332,64 @@ function resumeGame() {
   }
 
   document.querySelectorAll(".key").forEach(key => key.disabled = false);
-  window.addEventListener("keydown", handleTyping);
+  //window.addEventListener("keydown", handleTyping);
 }
+
+
+// PAUSE/PLAY TOGGLE
+const pauseBtn = document.getElementById("pausePlay");
+const pauseText = pauseBtn.querySelector(".pausePlaytxt");
+const pausePopover = document.getElementById("hintPopover");
+
+pausePopover.setAttribute("popover", "manual");
+pausePopover.classList.add("pause-popover");
+
+pauseBtn.addEventListener("click", () => {
+  if (isGamePaused) {
+    pausePopover.hidePopover();
+    resumeGame();
+    pauseText.textContent = "Pause";
+  } else {
+    pauseGame();
+    pauseText.textContent = "Play";
+    pausePopover.textContent = "Game Paused";
+    pausePopover.showPopover();
+  }
+});
+
+
+
+// HOOK BACKSPACE TO UNDO FUNCTION
+function handleBackspace() {
+  if (window.typedInputs && window.typedInputs.length > 0) {
+    for (let i = window.typedInputs.length - 1; i >= 0; i--) {
+      if (window.typedInputs[i].length > 0) {
+        window.typedInputs[i] = window.typedInputs[i].slice(0, -1);
+        break;
+      }
+    }
+    updateCodeBlockFromTyped();
+  }
+}
+
+document.getElementById("undoBtn").addEventListener("click", handleBackspace);
+
+// Clear inputs
+document.getElementById("clearBtn").addEventListener("click", () => {
+  if (window.typedInputs) {
+    window.typedInputs = Array(window.expectedInputs.length).fill("");
+    updateCodeBlockFromTyped();
+  }
+});
+
+// Backspace key listener
+window.addEventListener("keydown", (e) => {
+  if (!isGamePaused && e.key === "Backspace") {
+    e.preventDefault();
+    handleBackspace();
+  }
+});
+
 
 // Clear local storage button combo. CTRL + ALT + X
 window.addEventListener("keydown", (e) => {

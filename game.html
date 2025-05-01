@@ -21,42 +21,44 @@
             <div></div>
         </div>
     </div>
-      
-    <main>
-        
-        <section class="gamewindow">
-        </section>
-        <section class="playerinputwindow">
-            <div class="keys">
-                <!-- generate the keys here at random order -->
-            </div>
-            <div class="button-bar">
-                <button id="undoBtn">Undo</button>
-                <button id="clearBtn">Clear</button>
-            </div>
-        </section>
-
-        <section class="settings"> 
-            <div class="timer-container">Timer: <span class="timer"></span></div>
-            <div class="settings-items">
-                <!-- <button id="btn-settings"><span class="icon-settings"></span></button> -->
-                <button id="btn-help">
-                    <span class="icon-help"><img src="images/icon-help.svg" alt=""></span>
-                </button>
-            </div>
-        </section>
-        <section class="score"> 
-            <span>Score: </span> <span id="scoreVal"></span>
-        </section>
-        <section class="renderwindow">
-            <h3>Render Preview</h3>
-            <!-- start of generated render solution -->
-            <div class="example-box"> <!-- parent-->
-                <!-- Child to be selected by the codeblock css-->
-            </div>
-        </section>
-        
-    </main>
+    <div class="container-wrapper">
+        <main>
+            <section class="gamewindow">
+            </section>
+            <section class="playerinputwindow">
+                <div class="keys">
+                    <!-- generate the keys here at random order -->
+                </div>
+                <div class="button-bar">
+                    <button id="pausePlay"><span class="pausePlaytxt">Pause</span></button>
+                    <button id="undoBtn">Undo</button>
+                    <button id="clearBtn">Clear</button>
+                </div>
+            </section>
+    
+            <section class="settings"> 
+                <div class="timer-container">Timer: <span class="timer"></span></div>
+                <div class="settings-items">
+                    <!-- <button id="btn-settings"><span class="icon-settings"></span></button> -->
+                    <button id="btn-help">
+                        <span class="icon-help"><img src="images/icon-help.svg" alt=""></span>
+                    </button>
+                </div>
+            </section>
+            <section class="score"> 
+                <span>Score: </span> <span id="scoreVal"></span>
+            </section>
+            <section class="renderwindow">
+                <h3>Render Preview</h3>
+                <!-- start of generated render solution -->
+                <div class="example-box"> <!-- parent-->
+                    <!-- Child to be selected by the codeblock css-->
+                </div>
+            </section>
+            
+        </main>
+    </div>
+    
 
     <dialog id="help">
         <div class="instruction">
