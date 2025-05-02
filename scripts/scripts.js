@@ -151,12 +151,41 @@ function spawnCodeBlock() {
     block.textContent = broken;
   }
 
-  const positions = ["flex-start", "center", "flex-end"];
-  gameArea.style.justifyContent = positions[Math.floor(Math.random() * positions.length)];
+  // Validate and default spawn type
+  const validSpawns = ["fall", "random"];
+  const spawnType = validSpawns.includes(currentPuzzle.spawn) ? currentPuzzle.spawn : "fall";
 
-  gameArea.appendChild(block);
-  block.style.animation = "fallFromSky 10s linear forwards";
+  // Validate and default speed
+  let speed = parseFloat(currentPuzzle.speed);
+  if (isNaN(speed) || speed <= 0) speed = 10;
+
+  if (spawnType === "random") {
+    const positions = ["flex-start", "center", "flex-end"];
+    gameArea.style.justifyContent = positions[Math.floor(Math.random() * positions.length)];
+
+    gameArea.appendChild(block); // Append first to measure
+
+    block.style.position = "relative";
+
+    const blockHeight = block.offsetHeight;
+    const areaHeight = gameArea.offsetHeight;
+    const maxBottom = Math.max(0, areaHeight - blockHeight - 10); // 10px padding
+
+    const randomBottom = Math.floor(Math.random() * maxBottom);
+    block.style.bottom = `${randomBottom}px`;
+
+    block.style.opacity = "0";
+    block.style.animation = `fadeInCode ${speed}s ease forwards`;
+  } else {
+    gameArea.style.justifyContent = "center";
+    block.style.animation = `fallFromSky ${speed}s linear forwards`;
+    gameArea.appendChild(block); // Append only here for "fall"
+  }
 }
+
+
+
+
 
 function escapeHTML(str) {
   return str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
@@ -301,12 +330,17 @@ function pauseGame() {
 
   if (window.timerInterval) {
     clearInterval(window.timerInterval);
-    savedTimer = parseInt(timerDisplay.textContent, 10) || 0;
   }
 
+  if (window.timerTimeout) {
+    clearTimeout(window.timerTimeout);
+    window.timerTimeout = null;
+  }
+
+  savedTimer = parseInt(timerDisplay.textContent, 10) || 0;
   document.querySelectorAll(".key").forEach(key => key.disabled = true);
-  //window.removeEventListener("keydown", handleTyping);
 }
+
 
 function resumeGame() {
   if (!isGamePaused) return;
@@ -320,19 +354,28 @@ function resumeGame() {
 
   if (savedTimer !== null) {
     let seconds = savedTimer;
+    timerDisplay.textContent = seconds;
+  
     window.timerInterval = setInterval(() => {
       if (isGamePaused) return;
       seconds--;
       timerDisplay.textContent = seconds;
       if (seconds <= 0) {
         clearInterval(window.timerInterval);
-        triggerTimeUp(); // must exist elsewhere
+        clearTimeout(window.timerTimeout);
+        moveToNextPuzzle(); 
       }
     }, 1000);
+  
+    window.timerTimeout = setTimeout(() => {
+      if (!isGamePaused) {
+        moveToNextPuzzle();
+      }
+    }, (seconds + 0.1) * 1000);
   }
+  
 
   document.querySelectorAll(".key").forEach(key => key.disabled = false);
-  //window.addEventListener("keydown", handleTyping);
 }
 
 
@@ -363,14 +406,21 @@ pauseBtn.addEventListener("click", () => {
 function handleBackspace() {
   if (window.typedInputs && window.typedInputs.length > 0) {
     for (let i = window.typedInputs.length - 1; i >= 0; i--) {
-      if (window.typedInputs[i].length > 0) {
-        window.typedInputs[i] = window.typedInputs[i].slice(0, -1);
+      const current = window.typedInputs[i];
+      if (current.length > 0) {
+        const removedChar = current.slice(-1); // get last char
+        window.typedInputs[i] = current.slice(0, -1); // remove last char
+
+        // Restore visual key
+        restoreKey(removedChar);
+
         break;
       }
     }
     updateCodeBlockFromTyped();
   }
 }
+
 
 document.getElementById("undoBtn").addEventListener("click", handleBackspace);
 
@@ -389,6 +439,19 @@ window.addEventListener("keydown", (e) => {
     handleBackspace();
   }
 });
+
+// Restoring the key after undo
+function restoreKey(char) {
+  const keysContainer = document.querySelector(".keys");
+  if (!keysContainer) return;
+
+  const btn = document.createElement("button");
+  btn.classList.add("key");
+  btn.textContent = char;
+  btn.addEventListener("click", () => handleKeyPress(char, btn));
+  keysContainer.appendChild(btn);
+}
+
 
 
 // Clear local storage button combo. CTRL + ALT + X

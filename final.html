@@ -19,10 +19,15 @@
 
     <script>
         // Load score from localStorage
-        const score = localStorage.getItem('score') || 0;
-        document.getElementById('final-score').textContent = score;
+        window.addEventListener("DOMContentLoaded", () => {
+            const score = localStorage.getItem('playerScore') || 0;
+            document.getElementById('final-score').textContent = score;
+        });
+        
 
         function restartGame() {
+            localStorage.removeItem("completedPuzzleIds");
+            localStorage.removeItem("playerScore");
             window.location.href = 'game.html';
         }
     </script>

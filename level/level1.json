@@ -4,14 +4,18 @@
         "type": "html",        
         "solution": "<h1>Welcome</h1>",
         "broken": "<h1>Welcome%input%",
-        "timer": 10
+        "timer": 10,
+        "speed": 10,
+        "spawn": "fall"
     },
     {
         "id":"002",
         "type": "html",        
         "solution": "<p>This is a paragraph</p>",
         "broken": "%input%This is a paragraph</p>",
-        "timer": 10
+        "timer": 10,
+        "speed": 10,
+        "spawn": "fall"
     },      
     {
         "id":"003",
@@ -19,7 +23,9 @@
         "solution": ".demo p{color: green;}",
         "broken": ".demo p{%input%: green;}",
         "previewHTML": "<p>Hello</p>",
-        "timer": 15
+        "timer": 15,
+        "speed": 10,
+        "spawn": "fall"
     },
     {
         "id": "004",
@@ -27,7 +33,9 @@
         "solution": ".demo {\n display:flex;\n justify-content:flex-end;\n width:200px;\n height:200px;\n border:1px solid black }\n\n .demo div { width: 20px;\n height: 20px;\n background-color: red;\n}",
         "broken": ".demo {\n display:flex;\n justify-content:%input%;\n width:200px;\n height:200px;\n border:1px solid black }\n\n .demo div { width: 20px;\n height: 20px;\n background-color: red;\n}",
         "previewHTML": "<div></div>",
-        "timer": 20
+        "timer": 20,
+        "speed": 2,
+        "spawn": "random"
     }
     
     

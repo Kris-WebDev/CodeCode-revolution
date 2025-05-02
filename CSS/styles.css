@@ -66,6 +66,11 @@
     }
 }
 
+@keyframes fadeInCode {
+    0% { opacity: 0;  }
+    100% { opacity: 1;  }
+}
+
 .blinking-cursor::after {
     content: "";
     display: inline-block;
@@ -240,11 +245,12 @@ section {
         padding: 0.5rem;
         box-sizing: border-box;
         z-index: 10;
-        font-size: 1.3em;
+        font-size: 1.4em;
         transition: all 0.05s linear;
         font-family: monospace;
         white-space: pre-wrap;
         bottom: 100%;
+        height: fit-content;
     }
 
 }

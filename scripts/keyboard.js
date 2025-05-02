@@ -9,11 +9,13 @@ document.addEventListener("keydown", (e) => {
 
     const expectedChar = window.expectedInputs[currentSegment][window.typedInputs[currentSegment].length];
 
-    if (e.key === expectedChar) {
-        window.typedInputs[currentSegment] += e.key;
+    if (e.key.toLowerCase() === expectedChar.toLowerCase()) {
+        window.typedInputs[currentSegment] += expectedChar; // use expectedChar to preserve original casing
 
-        // Remove first matching key button
-        const keyBtn = document.querySelector(`.key[data-char="${e.key}"]`);
+        // Remove first matching key button (case-insensitive)
+        const keyBtn = [...document.querySelectorAll(`.key`)].find(btn =>
+            btn.dataset.char.toLowerCase() === e.key.toLowerCase()
+        );
         if (keyBtn) keyBtn.remove();
 
         addScore(10);
@@ -23,7 +25,6 @@ document.addEventListener("keydown", (e) => {
         flashScoreRed();
     }
 });
-
 
 document.addEventListener("click", (e) => {
     if (!e.target.classList.contains("key")) return;
@@ -35,16 +36,16 @@ document.addEventListener("click", (e) => {
 
     const expectedChar = window.expectedInputs[currentSegment][window.typedInputs[currentSegment].length];
 
-    if (char === expectedChar) {
-        window.typedInputs[currentSegment] += char;
+    if (char.toLowerCase() === expectedChar.toLowerCase()) {
+        window.typedInputs[currentSegment] += expectedChar; // preserve correct case from puzzle
 
         // Remove clicked key
         e.target.remove();
 
-        addScore(10); // ✅ correct input
+        addScore(10);
         updateCodeBlockFromTyped();
     } else {
-        addScore(-10); // ❌ wrong input
+        addScore(-10);
         flashScoreRed();
     }
 });
