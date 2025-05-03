@@ -7,6 +7,7 @@ let completedPuzzleIds = new Set();
 let isGamePaused = false;
 let savedTimer = null;
 let savedBlock = null;
+let puzzleInteracted = false;
 
 window.isAdvancing = false;
 window.timerInterval = null;
@@ -71,10 +72,14 @@ function loadRandomPuzzle() {
 
   const randomPuzzle = available[Math.floor(Math.random() * available.length)];
   currentPuzzle = randomPuzzle;
-  completedPuzzleIds.add(currentPuzzle.id);
-  localStorage.setItem("completedPuzzleIds", JSON.stringify([...completedPuzzleIds]));
+  // completedPuzzleIds.add(currentPuzzle.id);
+  // localStorage.setItem("completedPuzzleIds", JSON.stringify([...completedPuzzleIds]));
 
-
+  if (puzzleInteracted && currentPuzzle && currentPuzzle.id) {
+    completedPuzzleIds.add(currentPuzzle.id);
+    localStorage.setItem('completedPuzzleIds', JSON.stringify([...completedPuzzleIds]));
+  }
+  puzzleInteracted = false;
   spawnCodeBlock();
   generateKeys(currentPuzzle);
   renderSolution(currentPuzzle.solution, currentPuzzle.type);
@@ -165,7 +170,7 @@ function spawnCodeBlock() {
 
     gameArea.appendChild(block); // Append first to measure
 
-    block.style.position = "relative";
+    block.style.position = "absolute";
 
     const blockHeight = block.offsetHeight;
     const areaHeight = gameArea.offsetHeight;
@@ -182,9 +187,6 @@ function spawnCodeBlock() {
     gameArea.appendChild(block); // Append only here for "fall"
   }
 }
-
-
-
 
 
 function escapeHTML(str) {

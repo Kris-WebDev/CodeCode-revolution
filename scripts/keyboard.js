@@ -17,7 +17,7 @@ document.addEventListener("keydown", (e) => {
             btn.dataset.char.toLowerCase() === e.key.toLowerCase()
         );
         if (keyBtn) keyBtn.remove();
-
+        puzzleInteracted = true;
         addScore(10);
         updateCodeBlockFromTyped();
     } else {

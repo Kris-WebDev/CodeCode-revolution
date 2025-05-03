@@ -544,5 +544,6 @@ dialog,
         width: 94%;
         height: 96%;
         padding: .8rem;
+        gap: .5rem;
     }
 }
