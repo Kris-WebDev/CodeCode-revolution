@@ -7,17 +7,93 @@
     <title>Code Code Revolution</title>
 
     <link rel="stylesheet" href="CSS/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
 
     <style>
         .code-block {
             top:25%;
             height: fit-content;
         }
+
+        .welcomeScreen {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            container-type: inline-size;
+        }
+
+        .nintendoContainer {
+            position: relative;
+            width: 100%;
+            height: 50dvh;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            box-sizing: border-box;
+            align-items: center;
+
+            .nintendoDrop {
+                width: fit-content;
+                position: absolute;
+                line-height: 2.5rem;
+                font-size: 2rem;
+                font-family: 'Press Start 2P', monospace;
+            }
+        }
+        /* Phone portrait */
+        @container (max-width: 480px) {
+            .nintendoDrop {
+                left: 50%;
+                transform: translateX(-50%);
+            }
+        }    
+
+        .player-option {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 50dvh;
+            gap: 20px;
+
+            button {
+                width: fit-content;
+                min-width: 160px;
+                padding: 1em;
+                font-size: 1.1rem;
+            }
+        }
+
+        @keyframes nintendo {
+            0% {                
+                bottom: 100%;
+            }
+            100% {                
+                bottom: 0;
+            }
+        }
+
+        .nintendoDrop {
+            animation: nintendo 5s linear forwards;
+        }
+
     </style>
 </head>
 
 <body>
-    <div class="container-wrapper">
+    <div class="welcomeScreen">
+        <div class="nintendoContainer">
+            <h1 class="nintendoDrop">Code Code Revolution</h1>
+        </div>
+        <div class="player-option">
+            <button id="StartGame">Start Game</button>
+            <button id="howToPlay">How to Play</button>
+        </div>
+
+    </div>
+    <div class="container-wrapper" style="display: none;">
         <main>
             
             <section class="gamewindow">

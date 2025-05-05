@@ -4,36 +4,108 @@
         "type": "html",        
         "solution": "<h1>Welcome</h1>",
         "broken": "<h1>Welcome%input%",
+        "previewHTML": "<div></div>",
         "timer": 10,
-        "speed": 10,
-        "spawn": "fall"
+        "speed": 2,
+        "spawn": "random"
     },
     {
         "id":"002",
         "type": "html",        
         "solution": "<p>This is a paragraph</p>",
         "broken": "%input%This is a paragraph</p>",
+        "previewHTML": "<div></div>",
         "timer": 10,
-        "speed": 10,
-        "spawn": "fall"
+        "speed": 2,
+        "spawn": "random"
     },      
     {
         "id":"003",
         "type": "css",        
         "solution": ".demo p{color: green;}",
-        "broken": ".demo p{%input%: green;}",
+        "broken": ".demo p{%input%: %input%;}",
         "previewHTML": "<p>Hello</p>",
         "timer": 15,
-        "speed": 10,
-        "spawn": "fall"
+        "speed": 2,
+        "spawn": "random"
     },
     {
         "id": "004",
-        "type": "css",
-        "solution": ".demo {\n display:flex;\n justify-content:flex-end;\n width:200px;\n height:200px;\n border:1px solid black }\n\n .demo div { width: 20px;\n height: 20px;\n background-color: red;\n}",
-        "broken": ".demo {\n display:flex;\n justify-content:%input%;\n width:200px;\n height:200px;\n border:1px solid black }\n\n .demo div { width: 20px;\n height: 20px;\n background-color: red;\n}",
+        "type": "html",
+        "solution": "<img src='cat.jpg'>",
+        "broken": "<img %input%='cat.jpg'>",
         "previewHTML": "<div></div>",
-        "timer": 20,
+        "timer": 10,
+        "speed": 2,
+        "spawn": "random"
+    },
+    {
+        "id": "005",
+        "type": "html",
+        "solution": "<a href='https://example.com'>Click</a>",
+        "broken": "<a href='https://example.com'>Click%input%",
+        "previewHTML": "<div></div>",
+        "timer": 12,
+        "speed": 2,
+        "spawn": "random"
+    },
+    {
+        "id": "006",
+        "type": "html",
+        "solution": "<ul><li>Item</li></ul>",
+        "broken": "<ul><li>Item%input%",
+        "previewHTML": "<div></div>",
+        "timer": 12,
+        "speed": 2,
+        "spawn": "random"
+    },
+    {
+        "id": "007",
+        "type": "html",
+        "solution": "<button>Click me</button>",
+        "broken": "<button>Click me%input%",
+        "previewHTML": "<div></div>",
+        "timer": 12,
+        "speed": 2,
+        "spawn": "random"
+    },
+    {
+        "id": "008",
+        "type": "css",
+        "solution": ".demo {font-size: 20px;}",
+        "broken": ".demo {%input%: 20px;}",
+        "previewHTML": "<p>Text</p>",
+        "timer": 12,
+        "speed": 2,
+        "spawn": "random"
+    },
+    {
+        "id": "009",
+        "type": "css",
+        "solution": ".demo {background-color: yellow;}",
+        "broken": ".demo {%input%-color: yellow;}",
+        "previewHTML": "<div style='width:50px;height:50px'></div>",
+        "timer": 12,
+        "speed": 2,
+        "spawn": "random"
+    },
+    {
+        "id": "010",
+        "type": "css",
+        "solution": ".demo {border: 3px solid green;}",
+        "broken": ".demo {%input%: 3px solid green;}",
+        "previewHTML": "<div style='width:50px;height:50px'></div>",
+        "timer": 15,
+        "speed": 2,
+        "spawn": "random"
+    },
+    {
+        "id": "011",
+        "type": "css",
+        "solution": ".demo {text-align: center;}",
+        "broken": ".demo {%input%-align: center;}",
+        "previewHTML": "<p>Hello!</p>",
+        "timer": 15,
         "speed": 2,
         "spawn": "random"
     }

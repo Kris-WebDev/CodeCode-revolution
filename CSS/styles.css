@@ -14,12 +14,6 @@
 }
 
 /* Animation */
-@keyframes drop {
-    to {
-        top: 80%;
-    }
-}
-
 @keyframes fallFromSky {
     0% {
         bottom: 100%;
@@ -110,7 +104,7 @@ body {
     height: 100dvh;
 }
 
-button {
+button,.btn-normal {
     background-color: var(--accent);
     color: var(--screen);
     border: 1px solid var(--border);
@@ -119,6 +113,7 @@ button {
     font-size: 1rem;
     cursor: pointer;
     border-radius: 0.25rem;
+    text-decoration: none;
 
     &:hover {
         background-color: var(--highlight);

@@ -28,6 +28,7 @@ const helpDialog = document.getElementById("help");
 const btnHelp = document.getElementById("btn-help");
 
 btnHelp.addEventListener("click", () => {
+    pauseGame();
     helpDialog.showModal();
 });
 

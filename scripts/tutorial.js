@@ -133,4 +133,36 @@ function endTutorial() {
     }, 500);
 }
 
-window.addEventListener("DOMContentLoaded", startTutorial);
+// Game starts
+document.getElementById("StartGame").addEventListener("click", () => {
+    window.location.href = "game.html";
+});
+
+//Show tutorial
+document.getElementById("howToPlay").addEventListener("click", () => {
+    const welcomeScreen = document.querySelector(".welcomeScreen");
+    const containerWrapper = document.querySelector(".container-wrapper");
+
+    welcomeScreen.style.display = "none"
+    containerWrapper.style.display = "flex"
+
+    startTutorial();
+});
+
+// check if its from game.html tutorial
+window.addEventListener("DOMContentLoaded", () => {
+    const params = new URLSearchParams(window.location.search);
+    const skipWelcome = params.get("tutorial") === "true";
+
+    const welcomeScreen = document.querySelector(".welcomeScreen");
+    const containerWrapper = document.querySelector(".container-wrapper");
+
+    if (skipWelcome) {
+        welcomeScreen.style.display = "none";
+        containerWrapper.style.display = "flex";
+        startTutorial();
+    }
+});
+
+
+//window.addEventListener("DOMContentLoaded", startTutorial);
