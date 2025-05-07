@@ -233,7 +233,7 @@ section {
 
     .code-block {
         position: absolute;
-        background: var(--block);
+        background: #FAF9F6;
         color: var(--highlight);
         border: 1px solid var(--border);
         font-family: var(--font);
@@ -267,11 +267,17 @@ section {
     }
 
     .example-box {
-        background-color: var(--bg);
+        background-color: #FAF9F6;
         border-radius: 0.25rem;
         flex-grow: 1;
         overflow: auto;
         padding: 0.5rem;
+
+        img {
+            width: 100%;
+            height: fit-content;
+            object-fit: cover;
+        }
     }
 }
 

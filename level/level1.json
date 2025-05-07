@@ -23,7 +23,7 @@
         "id":"003",
         "type": "css",        
         "solution": ".demo p{color: green;}",
-        "broken": ".demo p{%input%: %input%;}",
+        "broken": ".demo p{%input%: green;}",
         "previewHTML": "<p>Hello</p>",
         "timer": 15,
         "speed": 2,
@@ -32,9 +32,9 @@
     {
         "id": "004",
         "type": "html",
-        "solution": "<img src='cat.jpg'>",
-        "broken": "<img %input%='cat.jpg'>",
-        "previewHTML": "<div></div>",
+        "solution": "<img src='images/cat.png'>",
+        "broken": "<img %input%='images/cat.png'>",
+        "previewHTML": "<div style='max-width:200px'></div>",
         "timer": 10,
         "speed": 2,
         "spawn": "random"

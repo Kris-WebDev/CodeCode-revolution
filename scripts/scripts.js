@@ -52,6 +52,16 @@ async function loadLevel(levelNumber = 1) {
 }
 
 function loadRandomPuzzle() {
+  // ✅ Mark previous puzzle as completed if it was interacted with
+  if (puzzleInteracted && currentPuzzle && currentPuzzle.id) {
+    completedPuzzleIds.add(currentPuzzle.id);
+    localStorage.setItem('completedPuzzleIds', JSON.stringify([...completedPuzzleIds]));
+    //console.log("Marked puzzle as completed (interacted):", currentPuzzle.id);
+  }
+
+  puzzleInteracted = false; // reset for next round
+
+  // 🎯 Only show puzzles the user hasn't seen or interacted with
   const available = puzzles.filter(p => !completedPuzzleIds.has(p.id));
 
   if (available.length === 0) {
@@ -68,18 +78,12 @@ function loadRandomPuzzle() {
     }
     return;
   }
-  
 
   const randomPuzzle = available[Math.floor(Math.random() * available.length)];
   currentPuzzle = randomPuzzle;
-  // completedPuzzleIds.add(currentPuzzle.id);
-  // localStorage.setItem("completedPuzzleIds", JSON.stringify([...completedPuzzleIds]));
 
-  if (puzzleInteracted && currentPuzzle && currentPuzzle.id) {
-    completedPuzzleIds.add(currentPuzzle.id);
-    localStorage.setItem('completedPuzzleIds', JSON.stringify([...completedPuzzleIds]));
-  }
-  puzzleInteracted = false;
+  //console.log("Loaded puzzle ID:", currentPuzzle.id);
+
   spawnCodeBlock();
   generateKeys(currentPuzzle);
   renderSolution(currentPuzzle.solution, currentPuzzle.type);
@@ -87,6 +91,7 @@ function loadRandomPuzzle() {
 
   startPuzzleTimer(currentPuzzle.timer || 10);
 }
+
 
 // --- RENDER SOLUTION PREVIEW ---
 function renderSolution(code, type) {
@@ -101,7 +106,15 @@ function renderSolution(code, type) {
     styleTag.textContent = code;
     renderedSolutionContainer.append(demoBox, styleTag);
   } else if (type === "html") {
-    demoBox.innerHTML = code;
+    if (currentPuzzle.previewHTML) {
+      const wrapper = document.createElement("div");
+      wrapper.innerHTML = currentPuzzle.previewHTML;
+      const container = wrapper.firstElementChild;
+      if (container) container.innerHTML = code;
+      demoBox.appendChild(container || document.createTextNode(code));
+    } else {
+      demoBox.innerHTML = code;
+    }
     renderedSolutionContainer.appendChild(demoBox);
   } else {
     demoBox.textContent = "(no preview available)";

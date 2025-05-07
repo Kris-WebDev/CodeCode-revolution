@@ -41,7 +41,7 @@ document.addEventListener("click", (e) => {
 
         // Remove clicked key
         e.target.remove();
-
+        puzzleInteracted = true;
         addScore(10);
         updateCodeBlockFromTyped();
     } else {
