@@ -8,6 +8,7 @@ let isGamePaused = false;
 let savedTimer = null;
 let savedBlock = null;
 let puzzleInteracted = false;
+let totalPuzzlesInLevel = 0;
 
 window.isAdvancing = false;
 window.timerInterval = null;
@@ -43,21 +44,26 @@ window.addEventListener("DOMContentLoaded", () => {
 // --- LOAD LEVEL ---
 async function loadLevel(levelNumber = 1) {
   try {
-    const response = await fetch(`level/level${levelNumber}.json`);
-    puzzles = await response.json();
+    const response = await fetch(`level/level-${levelNumber}.json`);
+    const data = await response.json();
+    puzzles = data;
+    levelData = data;
+    totalPuzzlesInLevel = levelData.length;
+    currentLevel = levelNumber;
+    completedPuzzleIds = new Set(); 
     loadRandomPuzzle();
   } catch (err) {
-    console.error("Failed to load level:", err);
+    console.error(`Failed to load level-${levelNumber}.json:`, err);
   }
 }
 
 function loadRandomPuzzle() {
   // ✅ Mark previous puzzle as completed if it was interacted with
-  if (puzzleInteracted && currentPuzzle && currentPuzzle.id) {
-    completedPuzzleIds.add(currentPuzzle.id);
-    localStorage.setItem('completedPuzzleIds', JSON.stringify([...completedPuzzleIds]));
-    //console.log("Marked puzzle as completed (interacted):", currentPuzzle.id);
-  }
+  // if (puzzleInteracted && currentPuzzle && currentPuzzle.id) {
+  //   completedPuzzleIds.add(currentPuzzle.id);
+  //   localStorage.setItem('completedPuzzleIds', JSON.stringify([...completedPuzzleIds]));
+  //   //console.log("Marked puzzle as completed (interacted):", currentPuzzle.id);
+  // }
 
   puzzleInteracted = false; // reset for next round
 
@@ -288,14 +294,19 @@ function updateCodeBlockFromTyped() {
   });
 
   if (attempt === currentPuzzle.solution) {
+    console.log(`Puzzle ${currentPuzzle.id} completed and interacted.`);
+    puzzleInteracted = true;
     score += 100;
     updateScore(score);
-
+  
     clearInterval(window.timerInterval);
     clearTimeout(window.timerTimeout);
-
+  
+    // ✅ Optionally show a quick message before moving on
+    showGameMessage("Correct!", 800); // you can customize this duration
     setTimeout(moveToNextPuzzle, 800);
   }
+  
 }
 
 // --- TIMER ---
@@ -320,16 +331,22 @@ function startPuzzleTimer(seconds) {
 
 // --- NEXT PUZZLE ---
 function moveToNextPuzzle() {
-  if (window.isAdvancing) return;
-  window.isAdvancing = true;
+  if (puzzleInteracted && currentPuzzle && currentPuzzle.id) {
+    completedPuzzleIds.add(currentPuzzle.id);
+    localStorage.setItem('completedPuzzleIds', JSON.stringify([...completedPuzzleIds]));
+    //console.log("Marked puzzle as completed (interacted):", currentPuzzle.id);
+  }
 
-  clearInterval(window.timerInterval);
-  clearTimeout(window.timerTimeout);
+  if (completedPuzzleIds.size >= totalPuzzlesInLevel) {
+      showGameMessage(`Level ${currentLevel} complete! Loading Level ${currentLevel + 1}...`);
 
-  setTimeout(() => {
-    loadRandomPuzzle();
-    window.isAdvancing = false;
-  }, 300);
+      setTimeout(() => {
+          completedPuzzleIds.clear();
+          loadLevel(currentLevel + 1);
+      }, 2000);
+  } else {
+      loadRandomPuzzle();
+  }
 }
 
 // --- PAUSE & RESUME ---
@@ -394,7 +411,7 @@ function resumeGame() {
 }
 
 
-// PAUSE/PLAY TOGGLE
+// PAUSE/PLAY TOGGLE POPOVER
 const pauseBtn = document.getElementById("pausePlay");
 const pauseText = pauseBtn.querySelector(".pausePlaytxt");
 const pausePopover = document.getElementById("hintPopover");
@@ -490,4 +507,25 @@ window.addEventListener('load', () => {
     }, 1000); // delay for 1 second
   }
 });
+
+// Show Message
+function showGameMessage(message, duration = 1500) {
+  const popover = document.getElementById("hintPopover");
+  if (!popover) return;
+
+  popover.textContent = message;
+
+  try {
+    popover.showPopover();
+  } catch (e) {
+    // In case it's already showing or not supported
+    console.warn("Popover issue:", e);
+  }
+
+  setTimeout(() => {
+    if (popover.matches(":popover-open")) {
+      popover.hidePopover();
+    }
+  }, duration);
+}
 

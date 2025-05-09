@@ -9,7 +9,7 @@ const tutorialSteps = [
     },
     {
         target: ".gamewindow",
-        text: "This is where code blocks fall. Complete them before the timer runs out!"
+        text: "This is where code blocks falls or randomly popup. Complete them before the timer runs out!"
     },    
     {
         target: ".timer-container",

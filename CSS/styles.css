@@ -362,14 +362,33 @@ section {
 
 
 /* Dialogs and popovers */
-dialog,
-.popover {
+dialog {
     background: var(--screen);
     border: 2px solid var(--border);
     color: var(--text);
     padding: 1rem;
     border-radius: 0.25rem;
+
+    &::backdrop {
+        background-color: rgba(9, 9, 11, 0.1);
+        backdrop-filter: blur(0.4px);
+    }
+    
 }
+
+.popover {
+    background: var(--highlight);
+    border: 2px solid var(--border);
+    color: var(--screen);
+    padding: 1rem;
+    border-radius: 0.25rem;
+
+    &::backdrop {
+        background-color: rgba(9, 9, 11, 0.1);
+        backdrop-filter: blur(0.2px);
+    }
+}
+
 
 /* Tour */
 #tourPopover {
