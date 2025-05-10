@@ -1,12 +1,102 @@
 [
     {
-    "id": "012",
-    "type": "css",
-    "solution": ".demo {\n display:flex;\n justify-content:flex-end;\n width:200px;\n height:200px;\n border:1px solid black }\n\n .demo div { width: 20px;\n height: 20px;\n background-color: red;\n}",
-    "broken": ".demo {\n display:flex;\n justify-content:%input%;\n width:200px;\n height:200px;\n border:1px solid black }\n\n .demo div { width: 20px;\n height: 20px;\n background-color: red;\n}",
-    "previewHTML": "<div></div>",
-    "timer": 20,
-    "speed": 2,
-    "spawn": "random"
+        "id": "201",
+        "type": "html",
+        "solution": "<input type='text'>",
+        "broken": "<input %input%='text'>",
+        "previewHTML": "<div></div>",
+        "timer": 12,
+        "speed": 2,
+        "spawn": "fall"
+    },
+    {
+        "id": "202",
+        "type": "html",
+        "solution": "<div class='box'></div>",
+        "broken": "<div %input%='box'></div>",
+        "previewHTML": "<div></div>",
+        "timer": 13,
+        "speed": 2,
+        "spawn": "random"
+    },
+    {
+        "id": "203",
+        "type": "html",
+        "solution": "<table>\n <tr>\n  <td>Cell</td>\n </tr>\n </table>",
+        "broken": "<table>\n <tr>\n  <td>Cell%input%\n </tr>\n </table>",
+        "previewHTML": "<div></div>",
+        "timer": 15,
+        "speed": 2,
+        "spawn": "random"
+    },
+    {
+        "id": "204",
+        "type": "html",
+        "solution": "<form action='/submit'>\n<input type='text'>\n</form>",
+        "broken": "<form %input%='/submit'>\n<input type='text'>\n</form>",
+        "previewHTML": "<div style='border:1px solid black; padding:1em'></div>",
+        "timer": 13,
+        "speed": 2,
+        "spawn": "fall"
+    },
+    {
+        "id": "205",
+        "type": "html",
+        "solution": "<iframe src='page.html'></iframe>",
+        "broken": "<iframe %input%='page.html'></iframe>",
+        "previewHTML": "<div></div>",
+        "timer": 14,
+        "speed": 2,
+        "spawn": "fall"
+    },
+    {
+        "id": "206",
+        "type": "css",
+        "solution": ".demo { border:1px solid black }\n.demo div{margin-top: 10px;}",
+        "broken": ".demo { border:1px solid black }\n.demo div{%input%: 10px;}",
+        "previewHTML": "<div style='height:20px;background:green'></div>",
+        "timer": 14,
+        "speed": 2,
+        "spawn": "random"
+    },
+    {
+        "id": "207",
+        "type": "css",
+        "solution": ".demo p {font-weight: bold;}",
+        "broken": ".demo p {%input%-weight: bold;}",
+        "previewHTML": "<p>Hello</p>",
+        "timer": 14,
+        "speed": 2,
+        "spawn": "random"
+    },
+    {
+        "id": "208",
+        "type": "css",
+        "solution": ".demo div{padding: 8px;}",
+        "broken": ".demo div{%input%: 8px;}",
+        "previewHTML": "<div style='border:1px solid black'>Hello</div>",
+        "timer": 14,
+        "speed": 2,
+        "spawn": "random"
+    },
+    {
+        "id": "209",
+        "type": "css",
+        "solution": ".demo {display: flex;}",
+        "broken": ".demo {%input%: flex;}",
+        "previewHTML": "<div><div style='width:50px;height:50px;background-color:red'></div><div style='width:50px;height:50px;background-color:green'></div></div>",
+        "timer": 15,
+        "speed": 2,
+        "spawn": "fall"
+    },
+    {
+        "id": "210",
+        "type": "css",
+        "solution": ".demo:hover {color: red;}",
+        "broken": ".demo%input% {color: red;}",
+        "previewHTML": "<p style='font-size:1.2rem;'>Hover me</p>",
+        "timer": 16,
+        "speed": 2,
+        "spawn": "fall"
     }
 ]

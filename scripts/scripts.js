@@ -54,36 +54,26 @@ async function loadLevel(levelNumber = 1) {
     loadRandomPuzzle();
   } catch (err) {
     console.error(`Failed to load level-${levelNumber}.json:`, err);
-  }
-}
 
-function loadRandomPuzzle() {
-  // ✅ Mark previous puzzle as completed if it was interacted with
-  // if (puzzleInteracted && currentPuzzle && currentPuzzle.id) {
-  //   completedPuzzleIds.add(currentPuzzle.id);
-  //   localStorage.setItem('completedPuzzleIds', JSON.stringify([...completedPuzzleIds]));
-  //   //console.log("Marked puzzle as completed (interacted):", currentPuzzle.id);
-  // }
-
-  puzzleInteracted = false; // reset for next round
-
-  // 🎯 Only show puzzles the user hasn't seen or interacted with
-  const available = puzzles.filter(p => !completedPuzzleIds.has(p.id));
-
-  if (available.length === 0) {
+    // If no next level exists, show final dialog
     if (!window.hasShownCompletionAlert) {
       window.hasShownCompletionAlert = true;
       showDialog(
         "All Done!",
-        "All puzzles completed! Great job!",
+        "Great job!",
         "See Final Score",
         () => {
           window.location.href = "final.html";
         }
       );
     }
-    return;
   }
+}
+
+function loadRandomPuzzle() {
+  puzzleInteracted = false; // reset for next round
+  // 🎯 Only show puzzles the user hasn't seen or interacted with
+  const available = puzzles.filter(p => !completedPuzzleIds.has(p.id));
 
   const randomPuzzle = available[Math.floor(Math.random() * available.length)];
   currentPuzzle = randomPuzzle;
@@ -93,7 +83,7 @@ function loadRandomPuzzle() {
   spawnCodeBlock();
   generateKeys(currentPuzzle);
   renderSolution(currentPuzzle.solution, currentPuzzle.type);
-  updateScore(score);
+  //updateScore(score);
 
   startPuzzleTimer(currentPuzzle.timer || 10);
 }

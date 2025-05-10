@@ -52,8 +52,8 @@
     {
         "id": "006",
         "type": "html",
-        "solution": "<ul><li>Item</li></ul>",
-        "broken": "<ul><li>Item%input%",
+        "solution": "<ul>\n  <li>Item</li>\n</ul>",
+        "broken": "<ul>\n  <li>Item%input%\n</ul>",
         "previewHTML": "<div></div>",
         "timer": 12,
         "speed": 2,

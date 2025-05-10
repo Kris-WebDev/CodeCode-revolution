@@ -102,6 +102,7 @@ body {
     justify-content: center;
     align-items: center;
     height: 100dvh;
+    font-size:14px;
 }
 
 button,.btn-normal {
@@ -272,11 +273,22 @@ section {
         flex-grow: 1;
         overflow: auto;
         padding: 0.5rem;
+        font-size: 1rem;
 
         img {
             width: 100%;
             height: fit-content;
             object-fit: cover;
+        }
+
+        & .box {
+            width: 50px;
+            height: 50px;
+            background-color: dodgerblue;
+        }
+
+        & table {
+            border: 1px solid darkslategray;
         }
     }
 }

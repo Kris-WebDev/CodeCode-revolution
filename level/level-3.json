@@ -1,0 +1,12 @@
+[
+    {
+    "id": "301",
+    "type": "css",
+    "solution": ".demo {\n display:flex;\n justify-content:flex-end;\n width:200px;\n height:100px;\n border:1px solid black }\n\n .demo div { width: 20px;\n height: 20px;\n background-color: red;\n}",
+    "broken": ".demo {\n display:flex;\n justify-content:%input%;\n width:200px;\n height:100px;\n border:1px solid black }\n\n .demo div { width: 20px;\n height: 20px;\n background-color: red;\n}",
+    "previewHTML": "<div></div>",
+    "timer": 20,
+    "speed": 2,
+    "spawn": "random"
+    }
+]
