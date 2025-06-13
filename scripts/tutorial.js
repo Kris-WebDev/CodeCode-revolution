@@ -67,7 +67,7 @@ function showTutorialStep(stepIndex) {
 
     tourPopover.innerHTML = `
         <div>${step.text}</div>
-        <div style="margin-top: 10px; text-align: right;">
+        <div style="margin-top: 10px; display:flex; justify-content:space-between">
             ${stepIndex > 0 ? `<button class="prev-btn">Previous</button>` : ""}
             <button class="next-btn">${stepIndex < tutorialSteps.length - 1 ? "Next" : "Start Playing!"}</button>
         </div>

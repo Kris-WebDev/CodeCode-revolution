@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Code Code Revolution</title>
+
+    <link rel="stylesheet" href="CSS/styles.css">
+    <style>
+        /* Optional: Prevent animation for preview mode */
+        .code-block {
+            /* animation: none !important; */
+        }
+
+        /* Style placeholder for input */
+        .code-input {
+            background-color: #ff0;
+            padding: 0 4px;
+            border: 1px dashed #000;
+        }
+
+        .code-block {
+            opacity: 1 !important;
+        }
+
+    </style>
+</head> 
+
+<body>
+    <!-- <div id="loading-screen">
+        <div class="honeycomb">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </div> -->
+    <div class="container-wrapper">
+        <main>
+            <section class="gamewindow">
+            </section>
+            <section class="playerinputwindow">
+                <div class="keys">
+                    <!-- generate the keys here at random order -->
+                </div>
+                <div class="button-bar">
+                    <button id="gotoButton">Go to</button>
+                    <button id="pausePlay"><span class="pausePlaytxt">Pause</span></button>
+                    <button id="undoBtn">Undo</button>
+                    <button id="clearBtn">Clear</button>
+                </div>
+            </section>
+    
+            <section class="settings"> 
+                <div class="timer-container">Timer: <span class="timer"></span></div>
+                <div class="settings-items">
+                    <!-- <button id="btn-settings"><span class="icon-settings"></span></button> -->
+                    <button id="btn-help">
+                        <span class="icon-help"><img src="images/icon-help.svg" alt=""></span>
+                    </button>
+                </div>
+            </section>
+            <section class="score"> 
+                <span>Score: </span> <span id="scoreVal"></span>
+            </section>
+            <section class="renderwindow">
+                <h3>Render Preview</h3>
+                <!-- start of generated render solution -->
+                <div class="example-box"> <!-- parent-->
+                    <!-- Child to be selected by the codeblock css-->
+                </div>
+            </section>
+            
+        </main>
+    </div>
+    
+
+    <dialog id="help">
+        <div class="instruction">
+            <h2>How to Play</h2>
+            <ul>
+                <li>Complete the broken HTML/CSS code by typing or clicking the correct keys.</li>
+                <li>Each correct input gives you +10 points.</li>
+                <li>Each wrong input deducts 10 points.</li>
+                <li>Code blocks fall or show at random — complete them before they hit the bottom!</li>
+                <li>Finish puzzles to earn higher scores!</li>
+            </ul>
+        </div>
+        <div class="help-btn">
+            <a href="index.html?tutorial=true" id="showDemo" class="btn-normal">Show me how to play</a>
+            <button id="closeHelp">Close</button>
+        </div>
+        
+    </dialog>
+    
+
+    <dialog id="gameDialog">
+        <h2 id="dialogTitle"></h2>
+        <p id="dialogMessage"></p>
+        <button id="dialogButton">OK</button>
+    </dialog>
+
+    <div popover id="hintPopover" class="popover">
+    </div>
+
+    <dialog id="devTool-input">
+        <label for="levelSelect">Select Level:</label>
+        <select id="levelSelect">
+            <option value="level/level-1.json">Level 1</option>
+            <option value="level/level-2.json">Level 2</option>
+            <option value="level/level-3.json">Level 3</option>
+            <!-- add more if needed -->
+        </select>
+
+        <label for="puzzleNum">Puzzle ID:</label>
+        <input type="text" id="puzzleNum" />
+
+        <button id="devdialogButton">Load Puzzle</button>
+    </dialog>
+
+
+    <script src="scripts/preview-devtool.js"></script>
+    <script src="scripts/keyboard.js"></script>
+    <script src="scripts/utils.js"></script>
+</body>
+
+</html>

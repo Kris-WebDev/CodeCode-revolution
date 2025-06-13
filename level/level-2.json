@@ -12,8 +12,8 @@
     {
         "id": "202",
         "type": "html",
-        "solution": "<div class='box'></div>",
-        "broken": "<div %input%='box'></div>",
+        "solution": "<div class='box-blue'></div>",
+        "broken": "<div %input%='box-blue'></div>",
         "previewHTML": "<div></div>",
         "timer": 13,
         "speed": 2,
