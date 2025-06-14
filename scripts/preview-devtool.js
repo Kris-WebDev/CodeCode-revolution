@@ -41,8 +41,23 @@ window.addEventListener("DOMContentLoaded", () => {
 
   });
 
+  puzzleInput.addEventListener("keydown", (e) => {
+    if (e.key === "Enter") {
+      loadBtn.click(); // Simulate button click
+    }
+  });
+
   gotoBtn.addEventListener("click", () => {
     devDialog.showModal();
+  });
+
+  document.addEventListener("keydown", (e) => {
+    if (e.ctrlKey && e.altKey && e.key.toLowerCase() === "g") {
+      const devDialog = document.getElementById("devTool-input");
+      if (devDialog) {
+        devDialog.showModal();
+      }
+    }
   });
 
 });

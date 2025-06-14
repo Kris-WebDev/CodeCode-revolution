@@ -1,12 +1,102 @@
 [
     {
-    "id": "301",
-    "type": "css",
-    "solution": ".demo {\n display:flex;\n justify-content:flex-end;\n width:200px;\n height:100px;\n border:1px solid black }\n\n .demo div { width: 20px;\n height: 20px;\n background-color: red;\n}",
-    "broken": ".demo {\n display:flex;\n justify-content:%input%;\n width:200px;\n height:100px;\n border:1px solid black }\n\n .demo div { width: 20px;\n height: 20px;\n background-color: red;\n}",
-    "previewHTML": "<div></div>",
-    "timer": 20,
-    "speed": 2,
-    "spawn": "random"
+        "id": "301",
+        "type": "html",
+        "solution": "<details>\n  <summary>More info</summary>\n  <p>Details content</p>\n</details>",
+        "broken": "<details>\n  <%input%>More info</summary>\n  <p>Details content</p>\n</details>",
+        "previewHTML": "<div></div>",
+        "timer": 16,
+        "speed": 2,
+        "spawn": "fall"
+    },
+    {
+        "id": "302",
+        "type": "html",
+        "solution": "<figure>\n  <img src='images/cat.png' alt=''>\n  <figcaption>Caption</figcaption>\n</figure>",
+        "broken": "<figure>\n  <img src='images/cat.png' alt=''>\n  <%input%>Caption</figcaption>\n</figure>",
+        "previewHTML": "<div></div>",
+        "timer": 17,
+        "speed": 2,
+        "spawn": "random"
+    },
+    {
+        "id": "303",
+        "type": "html",
+        "solution": "<fieldset>\n  <legend>Info</legend>\n  <input type='text'>\n</fieldset>",
+        "broken": "<fieldset>\n  <%input%>Info</legend>\n  <input type='text'>\n</fieldset>",
+        "previewHTML": "<div></div>",
+        "timer": 17,
+        "speed": 2,
+        "spawn": "fall"
+    },
+    {
+        "id": "304",
+        "type": "html",
+        "solution": "<nav>\n  <ul>\n    <li><a href='#'>Home</a></li>\n    <li><a href='#'>About</a></li>\n  </ul>\n</nav>",
+        "broken": "<nav>\n  <ul>\n    <li><a href='#'>Home</a></li>\n    <li><a href='#'>About</a></li>\n  </ul>\n</%input%>",
+        "previewHTML": "<div></div>",
+        "timer": 18,
+        "speed": 2,
+        "spawn": "random"
+    },
+    {
+        "id": "305",
+        "type": "html",
+        "solution": "<section>\n  <h2>Title</h2>\n  <p>Paragraph</p>\n</section>",
+        "broken": "<section>\n  <h2>Title</h2>\n  <p>Paragraph</p>\n<%input%>",
+        "previewHTML": "<div></div>",
+        "timer": 16,
+        "speed": 2,
+        "spawn": "fall"
+    },
+    {
+        "id": "306",
+        "type": "css",
+        "solution": ".box-blue {\n  position: absolute;\n  top: 10px;\n  right: 20px;\n}",
+        "broken": ".box-blue {\n  position: %input%;\n  top: 10px;\n  right: 20px;\n}",
+        "previewHTML": "<div class='box-blue'></div>",
+        "timer": 18,
+        "speed": 2.5,
+        "spawn": "random"
+    },
+    {
+        "id": "307",
+        "type": "css",
+        "solution": ".box:hover { background-color: yellow; }",
+        "broken": ".box%input% { background-color: yellow; }",
+        "previewHTML": "<div class='box' style='width:60px;height:60px;border:1px solid grey;text-align:center'>Hover</div>",
+        "timer": 16,
+        "speed": 2.5,
+        "spawn": "fall"
+    },
+    {
+        "id": "308",
+        "type": "css",
+        "solution": ".box1 { transform: scale(1);}\n.box2 { transform: scale(1.2); }",
+        "broken": ".box1 { transform: scale(1);}\n.box2 { %input%: scale(1.2); }",
+        "previewHTML": "<div style='display:flex;gap:10px'><div class='box-blue box1'>box1</div><div class='box-red box2'>box2</div></div>",
+        "timer": 17,
+        "speed": 2.5,
+        "spawn": "random"
+    },
+    {
+        "id": "309",
+        "type": "css",
+        "solution": ".demo p::first-letter { font-size: 2em; }",
+        "broken": ".demo p%input% { font-size: 2em; }",
+        "previewHTML": "<p>Stylized letter</p>",
+        "timer": 18,
+        "speed": 2.5,
+        "spawn": "fall"
+    },
+    {
+        "id": "310",
+        "type": "css",
+        "solution": ".box-skyblue { box-shadow: 2px 2px 5px gray; }",
+        "broken": ".box-skyblue { %input%: 2px 2px 5px gray; }",
+        "previewHTML": "<div class='box-skyblue'></div>",
+        "timer": 17,
+        "speed": 2.5,
+        "spawn": "random"
     }
 ]

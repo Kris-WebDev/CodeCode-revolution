@@ -22,8 +22,8 @@
     {
         "id": "203",
         "type": "html",
-        "solution": "<table>\n <tr>\n  <td>Cell</td>\n </tr>\n </table>",
-        "broken": "<table>\n <tr>\n  <td>Cell%input%\n </tr>\n </table>",
+        "solution": "<table>\n <tr>\n  <td>Cell</td>\n </tr>\n</table>",
+        "broken": "<table>\n <tr>\n  <td>Cell%input%\n </tr>\n</table>",
         "previewHTML": "<div></div>",
         "timer": 15,
         "speed": 2,
