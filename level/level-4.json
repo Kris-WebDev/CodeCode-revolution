@@ -1,12 +1,102 @@
 [
     {
-    "id": "401",
-    "type": "css",
-    "solution": ".demo {\n display:flex;\n justify-content:flex-end;\n width:200px;\n height:100px;\n border:1px solid black }\n\n .demo div { width: 20px;\n height: 20px;\n background-color: red;\n}",
-    "broken": ".demo {\n display:flex;\n justify-content:%input%;\n width:200px;\n height:100px;\n border:1px solid black }\n\n .demo div { width: 20px;\n height: 20px;\n background-color: red;\n}",
-    "previewHTML": "<div></div>",
-    "timer": 20,
-    "speed": 2,
-    "spawn": "random"
+        "id": "401",
+        "type": "html",
+        "solution": "<form>\n  <label for='score'>Score:</label>\n  <input type='range' id='score' value='50'>\n  <output>50</output>\n</form>",
+        "broken": "<form>\n  <label for='score'>Score:</label>\n  <input type='range' id='score' value='50'>\n  <%input%>50</output>\n</form>",
+        "previewHTML": "<div></div>",
+        "timer": 20,
+        "speed": 2.5,
+        "spawn": "fall"
+    },
+    {
+        "id": "402",
+        "type": "html",
+        "solution": "<progress value='70' max='100'></progress>",
+        "broken": "<%input% value='70' max='100'></progress>",
+        "previewHTML": "<div></div>",
+        "timer": 15,
+        "speed": 2.5,
+        "spawn": "random"
+    },
+    {
+        "id": "403",
+        "type": "html",
+        "solution": "<time datetime='2025-06-14'>June 14, 2025</time>",
+        "broken": "<%input% datetime='2025-06-14'>June 14, 2025</time>",
+        "previewHTML": "<div></div>",
+        "timer": 17,
+        "speed": 2.5,
+        "spawn": "fall"
+    },
+    {
+        "id": "404",
+        "type": "html",
+        "solution": "<label for='email'>Email:</label>\n<input id='email' type='email'>",
+        "broken": "<label for='email'>Email:</label>\n<%input% id='email' type='email'>",
+        "previewHTML": "<div></div>",
+        "timer": 16,
+        "speed": 2.5,
+        "spawn": "random"
+    },
+    {
+        "id": "405",
+        "type": "html",
+        "solution": "<audio controls>\n  <source src='sound.mp3' type='audio/mpeg'>\n</audio>",
+        "broken": "<audio controls>\n  <%input% src='sound.mp3' type='audio/mpeg'>\n</audio>",
+        "previewHTML": "<div></div>",
+        "timer": 18,
+        "speed": 2.5,
+        "spawn": "fall"
+    },
+    {
+        "id": "406",
+        "type": "css",
+        "solution": ".container {\n  display: flex;\n  justify-content: center;\n  align-items: center;\n}",
+        "broken": ".container {\n  display: flex;\n  %input%: center;\n  align-items: center;\n}",
+        "previewHTML": "<div class='container'><div class='box-blue'></div></div>",
+        "timer": 20,
+        "speed": 2.8,
+        "spawn": "random"
+    },
+    {
+        "id": "407",
+        "type": "css",
+        "solution": ".container {\n  display: flex;\n  flex-wrap: wrap;\n  gap: 10px;\n}",
+        "broken": ".container {\n  display: flex;\n  %input%: wrap;\n  gap: 10px;\n}",
+        "previewHTML": "<div class='container' style='width:90px;border:1px solid grey'><div class='box-red'></div><div class='box-green'></div><div class='box-blue'></div></div>",
+        "timer": 24,
+        "speed": 2.8,
+        "spawn": "fall"
+    },
+    {
+        "id": "408",
+        "type": "css",
+        "solution": ".container div:nth-child(odd) {\n  background: lightgray;\n}",
+        "broken": ".container div%input% {\n  background: lightgray;\n}",
+        "previewHTML": "<div class='container'><div>div 1</div><div>div 2</div><div>div 3</div></div>",
+        "timer": 20,
+        "speed": 2.5,
+        "spawn": "random"
+    },
+    {
+        "id": "409",
+        "type": "css",
+        "solution": ".alert {\n  border-left: 5px solid red;\n  padding: 10px;\n  background-color: #ffe6e6;\n}",
+        "broken": ".alert {\n  %input%: 5px solid red;\n  padding: 10px;\n  background-color: #ffe6e6;\n}",
+        "previewHTML": "<div class='alert'>Error!</div>",
+        "timer": 16,
+        "speed": 2.5,
+        "spawn": "fall"
+    },
+    {
+        "id": "410",
+        "type": "css",
+        "solution": ".demo {\n  background: linear-gradient(to right, red, yellow);\n}",
+        "broken": ".demo {\n  %input%: linear-gradient(to right, red, yellow);\n}",
+        "previewHTML": "<div class='demo' style='height:30px'></div>",
+        "timer": 18,
+        "speed": 2.8,
+        "spawn": "random"
     }
 ]

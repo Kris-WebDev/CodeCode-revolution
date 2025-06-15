@@ -1,0 +1,102 @@
+[
+    {
+        "id": "501",
+        "type": "html",
+        "solution": "<dialog open>\n  <p>Welcome!</p>\n</dialog>",
+        "broken": "<%input% open>\n  <p>Welcome!</p>\n</dialog>",
+        "previewHTML": "<div></div>",
+        "timer": 18,
+        "speed": 2.5,
+        "spawn": "fall"
+    },
+    {
+        "id": "502",
+        "type": "html",
+        "solution": "<nav role='navigation'>\n  <ul>\n    <li>Home</li>\n  </ul>\n</nav>",
+        "broken": "<nav %input%='navigation'>\n  <ul>\n    <li>Home</li>\n  </ul>\n</nav>",
+        "previewHTML": "<div></div>",
+        "timer": 16,
+        "speed": 2.5,
+        "spawn": "random"
+    },
+    {
+        "id": "503",
+        "type": "html",
+        "solution": "<p>We use <abbr title='Cascading Style Sheets'>CSS</abbr> for styling.</p>",
+        "broken": "<p>We use <%input% title='Cascading Style Sheets'>CSS</abbr> for styling.</p>",
+        "previewHTML": "<div></div>",
+        "timer": 19,
+        "speed": 2.5,
+        "spawn": "fall"
+    },
+    {
+        "id": "504",
+        "type": "html",
+        "solution": "<div role='button' aria-label='Open menu'>\n  ☰\n</div>",
+        "broken": "<div role='button' %input%label='Open menu'>\n  ☰\n</div>",
+        "previewHTML": "<div></div>",
+        "timer": 18,
+        "speed": 2.5,
+        "spawn": "random"
+    },
+    {
+        "id": "505",
+        "type": "html",
+        "solution": "<template>\n  <p>This is hidden</p>\n</template>",
+        "broken": "<%input%>\n  <p>This is hidden</p>\n</template>",
+        "previewHTML": "<div></div>",
+        "timer": 20,
+        "speed": 2.5,
+        "spawn": "fall"
+    },
+    {
+        "id": "506",
+        "type": "css",
+        "solution": ".demo {\n  display: grid;\n  grid-template-columns: 1fr 1fr;\n  gap: 10px;\n}",
+        "broken": ".demo {\n  display: grid;\n  %input%-columns: 1fr 1fr;\n  gap: 10px;\n}",
+        "previewHTML": "<div class='demo'><div>1</div><div>2</div></div>",
+        "timer": 20,
+        "speed": 2.5,
+        "spawn": "fall"
+    },
+    {
+        "id": "507",
+        "type": "css",
+        "solution": "dialog[open] {\n  border: 2px solid black;\n  padding: 1em;\n}",
+        "broken": "dialog%input% {\n  border: 2px solid black;\n  padding: 1em;\n}",
+        "previewHTML": "<dialog open>Text</dialog>",
+        "timer": 19,
+        "speed": 2.5,
+        "spawn": "random"
+    },
+    {
+        "id": "508",
+        "type": "css",
+        "solution": ".demo {\n  place-items: center;\n  height: 100px;\n  display: grid;\n}",
+        "broken": ".demo {\n  %input%: center;\n  height: 100px;\n  display: grid;\n}",
+        "previewHTML": "<div class='demo'><div>Hello</div></div>",
+        "timer": 18,
+        "speed": 2.5,
+        "spawn": "random"
+    },
+    {
+        "id": "509",
+        "type": "css",
+        "solution": ".demo:focus-visible {\n  outline: 2px solid red;\n}",
+        "broken": ".demo%input%visible {\n  outline: 2px solid red;\n}",
+        "previewHTML": "<div class='demo' tabindex='0'>Click me</div>",
+        "timer": 19,
+        "speed": 2.5,
+        "spawn": "fall"
+    },
+    {
+        "id": "510",
+        "type": "css",
+        "solution": ".box {\n  transition: transform 0.3s ease;\n}\n\n.box:hover {\n  transform: scale(1.2);\n}",
+        "broken": ".box {\n  %input%: transform 0.3s ease;\n}\n\n.box:hover {\n  transform: scale(1.2);\n}",
+        "previewHTML": "<div class='box'>Hover me</div>",
+        "timer": 19,
+        "speed": 2.5,
+        "spawn": "random"
+    }
+]
