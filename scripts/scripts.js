@@ -300,6 +300,24 @@ function updateCodeBlockFromTyped() {
 }
 
 // --- TIMER ---
+// function startPuzzleTimer(seconds) {
+//   clearInterval(window.timerInterval);
+//   clearTimeout(window.timerTimeout);
+
+//   let timeLeft = seconds;
+//   timerDisplay.textContent = timeLeft;
+
+//   window.timerInterval = setInterval(() => {
+//     timeLeft--;
+//     timerDisplay.textContent = timeLeft;
+//     if (timeLeft <= 0) {
+//       clearInterval(window.timerInterval);
+//       moveToNextPuzzle();
+//     }
+//   }, 1000);
+
+//   window.timerTimeout = setTimeout(moveToNextPuzzle, (seconds + 0.1) * 1000);
+// }
 function startPuzzleTimer(seconds) {
   clearInterval(window.timerInterval);
   clearTimeout(window.timerTimeout);
@@ -310,14 +328,30 @@ function startPuzzleTimer(seconds) {
   window.timerInterval = setInterval(() => {
     timeLeft--;
     timerDisplay.textContent = timeLeft;
+
     if (timeLeft <= 0) {
       clearInterval(window.timerInterval);
-      moveToNextPuzzle();
+
+      // Show solution before moving on
+      if (puzzleInteracted && currentPuzzle) {
+        showSolutionPopover(currentPuzzle);
+        setTimeout(() => moveToNextPuzzle(), 3500); // wait before advancing
+      } else {
+        moveToNextPuzzle(); // already solved, move on immediately
+      }
     }
   }, 1000);
 
-  window.timerTimeout = setTimeout(moveToNextPuzzle, (seconds + 0.1) * 1000);
+  window.timerTimeout = setTimeout(() => {
+    if (puzzleInteracted && currentPuzzle) {
+      showSolutionPopover(currentPuzzle);
+      setTimeout(() => moveToNextPuzzle(), 3500);
+    } else {
+      moveToNextPuzzle();
+    }
+  }, (seconds + 0.1) * 1000);
 }
+
 
 // --- NEXT PUZZLE ---
 function moveToNextPuzzle() {
@@ -368,37 +402,52 @@ function resumeGame() {
   if (!isGamePaused) return;
   isGamePaused = false;
 
+  
+
+  // Restore code block if saved
   if (savedBlock) {
     savedBlock.classList.remove("dummy");
     document.querySelector(".gamewindow").appendChild(savedBlock);
     savedBlock = null;
   }
 
+  // Clear previous timers just to be safe
+  clearTimeout(window.timerTimeout);
+  clearInterval(window.timerInterval);
+
   if (savedTimer !== null) {
     let seconds = savedTimer;
     timerDisplay.textContent = seconds;
-  
+
     window.timerInterval = setInterval(() => {
       if (isGamePaused) return;
       seconds--;
       timerDisplay.textContent = seconds;
+
       if (seconds <= 0) {
         clearInterval(window.timerInterval);
-        clearTimeout(window.timerTimeout);
-        moveToNextPuzzle(); 
       }
     }, 1000);
-  
+
     window.timerTimeout = setTimeout(() => {
       if (!isGamePaused) {
-        moveToNextPuzzle();
+        console.log("⏰ Timer expired. puzzleInteracted:", puzzleInteracted);
+
+        if (puzzleInteracted) {
+          showSolutionPopover(currentPuzzle);
+          pauseGame(true); // lock input while showing popover
+          setTimeout(() => moveToNextPuzzle(), 3500);
+        } else {
+          moveToNextPuzzle();
+        }
       }
     }, (seconds + 0.1) * 1000);
   }
-  
 
+  // Re-enable key inputs
   document.querySelectorAll(".key").forEach(key => key.disabled = false);
 }
+
 
 
 // PAUSE/PLAY TOGGLE POPOVER

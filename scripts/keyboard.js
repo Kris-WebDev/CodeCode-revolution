@@ -1,4 +1,6 @@
 document.addEventListener("keydown", (e) => {
+    if (isGamePaused) return; // 🔒 Don't allow typing when paused
+
     // Skip modifier and non-character keys
     if (["Shift", "Control", "Alt", "Meta", "CapsLock", "Tab"].includes(e.key)) return;
 
@@ -10,13 +12,14 @@ document.addEventListener("keydown", (e) => {
     const expectedChar = window.expectedInputs[currentSegment][window.typedInputs[currentSegment].length];
 
     if (e.key.toLowerCase() === expectedChar.toLowerCase()) {
-        window.typedInputs[currentSegment] += expectedChar; // use expectedChar to preserve original casing
+        window.typedInputs[currentSegment] += expectedChar;
 
         // Remove first matching key button (case-insensitive)
         const keyBtn = [...document.querySelectorAll(`.key`)].find(btn =>
             btn.dataset.char.toLowerCase() === e.key.toLowerCase()
         );
         if (keyBtn) keyBtn.remove();
+
         puzzleInteracted = true;
         addScore(10);
         updateCodeBlockFromTyped();
@@ -26,7 +29,10 @@ document.addEventListener("keydown", (e) => {
     }
 });
 
+
 document.addEventListener("click", (e) => {
+    if (isGamePaused) return; // 🔒 Don't allow clicking keys when paused
+
     if (!e.target.classList.contains("key")) return;
 
     const char = e.target.dataset.char;
@@ -37,10 +43,11 @@ document.addEventListener("click", (e) => {
     const expectedChar = window.expectedInputs[currentSegment][window.typedInputs[currentSegment].length];
 
     if (char.toLowerCase() === expectedChar.toLowerCase()) {
-        window.typedInputs[currentSegment] += expectedChar; // preserve correct case from puzzle
+        window.typedInputs[currentSegment] += expectedChar;
 
         // Remove clicked key
         e.target.remove();
+
         puzzleInteracted = true;
         addScore(10);
         updateCodeBlockFromTyped();

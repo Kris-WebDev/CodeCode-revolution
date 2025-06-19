@@ -43,5 +43,62 @@ helpDialog.addEventListener("cancel", (e) => {
 });
 
 
+function showSolutionPopover(puzzle) {
+    const timeoutPopover = document.getElementById("hintPopover");
+    if (!timeoutPopover) return;
+
+    const { broken, solution } = puzzle;
+
+    if (!broken.includes("%input%")) {
+        timeoutPopover.textContent = "Time’s up! No solution available.";
+        timeoutPopover.showPopover();
+        setTimeout(() => timeoutPopover.hidePopover(), 2400);
+        return;
+    }
+
+    // Find all missing parts from the solution
+    const brokenParts = broken.split("%input%");
+    let currentIndex = 0;
+    let result = "";
+
+    for (let i = 0; i < brokenParts.length - 1; i++) {
+        const partBefore = brokenParts[i];
+        const partAfter = brokenParts[i + 1];
+
+        const idxStart = solution.indexOf(partBefore, currentIndex) + partBefore.length;
+        const idxEnd = partAfter ? solution.indexOf(partAfter, idxStart) : solution.length;
+
+        const missingText = solution.slice(idxStart, idxEnd);
+        result += escapeHTML(partBefore) + `<mark>${escapeHTML(missingText)}</mark>`;
+        currentIndex = idxEnd;
+    }
+
+    result += escapeHTML(brokenParts.at(-1));
+
+    // 🔒 Use pause logic to disable input
+    pauseGame();
+
+    timeoutPopover.innerHTML = `
+    <div>
+      <strong>Time’s up!</strong><br>
+      Correct Answer:<br>
+      <code>${result}</code>
+    </div>
+  `;
+
+    try {
+        timeoutPopover.showPopover();
+    } catch (e) {
+        console.warn("Popover issue:", e);
+    }
+
+    setTimeout(() => {
+        if (timeoutPopover.matches(":popover-open")) {
+            resumeGame();
+            timeoutPopover.hidePopover();
+        }
+    }, 3400);
+}
+
 
 
