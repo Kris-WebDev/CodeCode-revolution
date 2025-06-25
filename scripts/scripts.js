@@ -243,15 +243,17 @@ function generateKeys(puzzle) {
 }
 
 // --- KEYBOARD ACTIONS ---
-document.getElementById("undoBtn").addEventListener("click", () => {
-  window.typedChars?.pop();
-  updateCodeBlockFromTyped();
+document.getElementById('undoBtn').addEventListener('click', () => {
+  if (!isGamePaused) {
+    handleBackspace(); 
+  }
 });
 
-document.getElementById("clearBtn").addEventListener("click", () => {
-  window.typedChars = [];
-  updateCodeBlockFromTyped();
-});
+
+// document.getElementById("clearBtn").addEventListener("click", () => {
+//   window.typedChars = [];
+//   updateCodeBlockFromTyped();
+// });
 
 function updateCodeBlockFromTyped() {
   const block = gameArea.querySelector(".code-block");
@@ -293,31 +295,13 @@ function updateCodeBlockFromTyped() {
     clearTimeout(window.timerTimeout);
   
     // ✅ Optionally show a quick message before moving on
-    showGameMessage("Correct!", 800); // you can customize this duration
+    showGameMessage("Correct!", 800); 
     setTimeout(moveToNextPuzzle, 800);
   }
   
 }
 
 // --- TIMER ---
-// function startPuzzleTimer(seconds) {
-//   clearInterval(window.timerInterval);
-//   clearTimeout(window.timerTimeout);
-
-//   let timeLeft = seconds;
-//   timerDisplay.textContent = timeLeft;
-
-//   window.timerInterval = setInterval(() => {
-//     timeLeft--;
-//     timerDisplay.textContent = timeLeft;
-//     if (timeLeft <= 0) {
-//       clearInterval(window.timerInterval);
-//       moveToNextPuzzle();
-//     }
-//   }, 1000);
-
-//   window.timerTimeout = setTimeout(moveToNextPuzzle, (seconds + 0.1) * 1000);
-// }
 function startPuzzleTimer(seconds) {
   clearInterval(window.timerInterval);
   clearTimeout(window.timerTimeout);
@@ -448,8 +432,6 @@ function resumeGame() {
   document.querySelectorAll(".key").forEach(key => key.disabled = false);
 }
 
-
-
 // PAUSE/PLAY TOGGLE POPOVER
 const pauseBtn = document.getElementById("pausePlay");
 const pauseText = pauseBtn.querySelector(".pausePlaytxt");
@@ -492,17 +474,6 @@ function handleBackspace() {
   }
 }
 
-
-document.getElementById("undoBtn").addEventListener("click", handleBackspace);
-
-// Clear inputs
-document.getElementById("clearBtn").addEventListener("click", () => {
-  if (window.typedInputs) {
-    window.typedInputs = Array(window.expectedInputs.length).fill("");
-    updateCodeBlockFromTyped();
-  }
-});
-
 // Backspace key listener
 window.addEventListener("keydown", (e) => {
   if (!isGamePaused && e.key === "Backspace") {
@@ -513,15 +484,21 @@ window.addEventListener("keydown", (e) => {
 
 // Restoring the key after undo
 function restoreKey(char) {
-  const keysContainer = document.querySelector(".keys");
+  const keysContainer = document.querySelector('.keys');
   if (!keysContainer) return;
 
-  const btn = document.createElement("button");
-  btn.classList.add("key");
+  const btn = document.createElement('button');
+  btn.classList.add('key');
   btn.textContent = char;
-  btn.addEventListener("click", () => handleKeyPress(char, btn));
+  btn.dataset.char = char;
+
+  btn.addEventListener('click', () => {
+    handleKeyInput(char, btn);
+  });
+
   keysContainer.appendChild(btn);
 }
+
 
 
 
